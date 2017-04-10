@@ -22,7 +22,7 @@ function createHalo(output) {
   const pieces = pieceLabels.map((label, i, arr) => {
     const piece = document.createElement('div');
     halo.appendChild(piece);
-    ['button', 'halo-piece'].forEach(c => piece.classList.add(c));
+    piece.classList.add('button', 'halo-piece');
     piece.textContent = label;
 
     const radius = halo.offsetWidth * 0.5;
@@ -47,7 +47,7 @@ function createHalo(output) {
 
   const backspace = document.createElement('div');
   wrapper.appendChild(backspace);
-  ['button', 'backspace'].forEach(c => backspace.classList.add(c));
+  backspace.classList.add('button', 'backspace');
   backspace.textContent = '\u232B';
   backspace.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (backspace.offsetWidth / 2);
   backspace.style.left = (wrapper.offsetWidth * 0.4) - (backspace.offsetWidth / 2);
@@ -59,7 +59,7 @@ function createHalo(output) {
 
   const clear = document.createElement('div');
   wrapper.appendChild(clear);
-  ['button', 'clear'].forEach(c => clear.classList.add(c));
+  clear.classList.add('button', 'clear');
   clear.textContent = '\u2327';
   clear.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (clear.offsetWidth / 2);
   clear.style.left = (wrapper.offsetWidth * 0.6) - (clear.offsetWidth / 2);
