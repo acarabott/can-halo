@@ -74,6 +74,8 @@ function createHalo(x, y) {
 const hammer = new Hammer(container);
 hammer.on('doubletap', event => {
   event.preventDefault();
+  if (event.target !== container) return;
+
   const bb = event.target.getBoundingClientRect();
   const borderWidth = parseInt(window.getComputedStyle(event.target)['borderWidth'], 10);
   const x = event.center.x - (bb.left + borderWidth);
