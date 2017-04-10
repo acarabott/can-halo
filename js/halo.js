@@ -45,12 +45,19 @@ function createHalo(output) {
     return piece;
   });
 
+  const inlineDimension = outputRect.height * 1.5;
+  const inlineTop = (outputRect.top + outputRect.height / 2) - (inlineDimension / 2);
+  const inlineFontSize = parseInt(window.getComputedStyle(output)['fontSize'], 10) * 1.5;
   const backspace = document.createElement('div');
   wrapper.appendChild(backspace);
   backspace.classList.add('button', 'backspace');
   backspace.textContent = '\u232B';
-  backspace.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (backspace.offsetWidth / 2);
-  backspace.style.left = (wrapper.offsetWidth * 0.4) - (backspace.offsetWidth / 2);
+  backspace.style.left = outputRect.right + 10;
+  backspace.style.top = inlineTop;
+  backspace.style.height = inlineDimension;
+  backspace.style.width = inlineDimension;
+  backspace.style.fontSize = inlineFontSize;
+
   const backspaceHammer = new Hammer(backspace);
   backspaceHammer.on('tap', event => {
     output.value = output.value.slice(0, output.value.length - 1);
@@ -61,8 +68,11 @@ function createHalo(output) {
   wrapper.appendChild(clear);
   clear.classList.add('button', 'clear');
   clear.textContent = '\u2327';
-  clear.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (clear.offsetWidth / 2);
-  clear.style.left = (wrapper.offsetWidth * 0.6) - (clear.offsetWidth / 2);
+  clear.style.left = outputRect.right + backspace.clientWidth + 20;
+  clear.style.top = inlineTop;
+  clear.style.height = inlineDimension;
+  clear.style.width = inlineDimension;
+  clear.style.fontSize = inlineFontSize;
 
   const clearHammer = new Hammer(clear);
   clearHammer.on('tap', event => output.value = '');
@@ -71,11 +81,9 @@ function createHalo(output) {
   wrapper.appendChild(done);
   done.classList.add('button', 'done');
   done.textContent = '\u2713';
-  done.style.left = outputRect.right + 10;
-  done.style.top = outputRect.top;
-  done.style.height = outputRect.height;
-  done.style.width = outputRect.height;
-  done.style.fontSize = parseInt(window.getComputedStyle(output)['fontSize'], 10);
+
+  done.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (done.offsetHeight / 2);
+  done.style.left = (wrapper.offsetWidth / 2) - (done.offsetWidth / 2);
   const doneHammer = new Hammer(done);
   doneHammer.on('tap', event => removeHalo(output));
 
