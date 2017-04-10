@@ -1,22 +1,19 @@
 // prevent mobile scrolling
 document.ontouchmove = function(event){ event.preventDefault(); }
 
+let test;
 
 const container = document.getElementById('area');
-const halos = [];
+const halos = new Map();
 
-function createHalo(x, y) {
+function createHalo(output) {
   const wrapper = document.createElement('div');
   container.appendChild(wrapper);
   wrapper.className = 'wrapper';
-  wrapper.style.left = x - (wrapper.offsetWidth / 2);
-  wrapper.style.top = y - (wrapper.offsetHeight / 2);
 
-  const output = document.createElement('div');
-  wrapper.appendChild(output);
-  output.className = 'output';
-  // output.textContent = '1234567890';
-
+  const bb = output.getBoundingClientRect();
+  wrapper.style.left = (bb.left + (bb.width / 2)) - (wrapper.clientWidth / 2);
+  wrapper.style.top = bb.bottom + 10;
   const halo = document.createElement('div');
   wrapper.appendChild(halo);
   halo.className = 'halo';
@@ -39,11 +36,11 @@ function createHalo(x, y) {
     const hammer = new Hammer(piece);
 
     hammer.on('tap', event => {
-      output.textContent = label === '-'
-        ? output.textContent[0] === '-' ? output.textContent.slice(1) : `-${output.textContent}`
+      output.value = label === '-'
+        ? output.value[0] === '-' ? output.value.slice(1) : `-${output.value}`
         : label === '.'
-          ? output.textContent.includes('.') ? output.textContent : output.textContent + label
-          : output.textContent + label;
+          ? output.value.includes('.') ? output.value : output.value + label
+          : output.value + label;
     });
     return piece;
   });
@@ -56,7 +53,7 @@ function createHalo(x, y) {
   backspace.style.left = (wrapper.offsetWidth * 0.4) - (backspace.offsetWidth / 2);
   const backspaceHammer = new Hammer(backspace);
   backspaceHammer.on('tap', event => {
-    output.textContent = output.textContent.slice(0, output.textContent.length - 1);
+    output.value = output.value.slice(0, output.value.length - 1);
   });
 
 
@@ -68,15 +65,17 @@ function createHalo(x, y) {
   clear.style.left = (wrapper.offsetWidth * 0.6) - (clear.offsetWidth / 2);
 
   const clearHammer = new Hammer(clear);
-  clearHammer.on('tap', event => output.textContent = '');
+  clearHammer.on('tap', event => output.value = '');
 
 
   return wrapper;
 }
 
 function clearAllHalos() {
-  halos.forEach(halo => container.removeChild(halo));
-  halos.length = 0;
+  halos.forEach((halo, key) => {
+    container.removeChild(halo);
+  });
+  halos.clear();
 }
 
 const containerHammer = new Hammer(container);
@@ -93,7 +92,15 @@ containerHammer.on('doubletap', event => {
   const borderWidth = parseInt(window.getComputedStyle(event.target)['borderWidth'], 10);
   const x = event.center.x - (bb.left + borderWidth);
   const y = event.center.y - (bb.top + borderWidth);
-  test = event.target
-  halos.push(createHalo(x, y));
+  // halos.push(createHalo(x, y));
 });
 
+Array.from(document.querySelectorAll('input[type=text]')).forEach(element => {
+  const hammer = new Hammer(element);
+  hammer.on('tap', event => {
+    event.preventDefault();
+    if (!halos.has(element)) {
+      halos.set(element, createHalo(element));
+    }
+  });
+});
