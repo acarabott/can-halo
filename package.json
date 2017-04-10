@@ -1,0 +1,21 @@
+{
+  "name": "can-halo",
+  "version": "1.0.0",
+  "description": "halo numeric input",
+  "main": "index.html",
+  "dependencies": {
+    "hammerjs": "^2.0.8"
+  },
+  "devDependencies": {
+    "hammerjs": "^2.0.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "y"
+  },
+  "author": "Arthur Carabott",
+  "license": "MIT"
+}
