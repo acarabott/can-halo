@@ -11,9 +11,9 @@ function createHalo(output) {
   container.appendChild(wrapper);
   wrapper.className = 'wrapper';
 
-  const bb = output.getBoundingClientRect();
-  wrapper.style.left = (bb.left + (bb.width / 2)) - (wrapper.clientWidth / 2);
-  wrapper.style.top = bb.bottom + 10;
+  const outputRect = output.getBoundingClientRect();
+  wrapper.style.left = (outputRect.left + (outputRect.width / 2)) - (wrapper.clientWidth / 2);
+  wrapper.style.top = outputRect.bottom + 10;
   const halo = document.createElement('div');
   wrapper.appendChild(halo);
   halo.className = 'halo';
@@ -67,8 +67,24 @@ function createHalo(output) {
   const clearHammer = new Hammer(clear);
   clearHammer.on('tap', event => output.value = '');
 
+  const done = document.createElement('div');
+  wrapper.appendChild(done);
+  done.classList.add('button', 'done');
+  done.textContent = '\u2713';
+  done.style.left = outputRect.right + 10;
+  done.style.top = outputRect.top;
+  done.style.height = outputRect.height;
+  done.style.width = outputRect.height;
+  done.style.fontSize = parseInt(window.getComputedStyle(output)['fontSize'], 10);
+  const doneHammer = new Hammer(done);
+  doneHammer.on('tap', event => removeHalo(output));
 
   return wrapper;
+}
+
+function removeHalo(key) {
+  container.removeChild(halos.get(key));
+  halos.delete(key);
 }
 
 function clearAllHalos() {
@@ -81,7 +97,7 @@ function clearAllHalos() {
 const containerHammer = new Hammer(container);
 containerHammer.on('tap', event => {
   if (event.target !== container) return;
-  clearAllHalos();
+  // clearAllHalos();
 });
 
 containerHammer.on('doubletap', event => {
