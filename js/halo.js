@@ -50,13 +50,15 @@ function createHalo(x, y) {
 
 const hammer = new Hammer(container);
 hammer.on('doubletap', event => {
+  event.preventDefault();
   const bb = event.target.getBoundingClientRect();
   const borderWidth = parseInt(window.getComputedStyle(event.target)['borderWidth'], 10);
   const x = event.center.x - (bb.left + borderWidth);
   const y = event.center.y - (bb.top + borderWidth);
   test = event.target
   createHalo(x, y);
-
 });
 
-// createHalo(250, 250);
+document.ontouchmove = function(event){
+  event.preventDefault();
+}
