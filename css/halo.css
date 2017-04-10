@@ -71,6 +71,7 @@ h1 {
 
 .halo-piece {
   background-color: var(--my-blue);
+  color: white;
 }
 
 .button:hover {
