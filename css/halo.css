@@ -1,0 +1,33 @@
+body {
+  font-family: Lato, 'Helvetica Neue', Helvetica;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+}
+
+
+:root {
+  --my-blue: rgb(43, 156, 212);
+}
+
+h1 {
+  text-align: center;
+}
+
+#area {
+  position: relative;
+  border: 10px solid var(--my-blue);
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  max-width: 1200px;
+  max-height: 675px;
+}
+
+.output {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--my-blue);
+  position: absolute;
+}
