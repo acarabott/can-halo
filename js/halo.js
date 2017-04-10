@@ -1,6 +1,5 @@
 const container = document.getElementById('area');
-
-let test;
+const halos = [];
 
 function createHalo(x, y) {
   const wrapper = document.createElement('div');
@@ -71,7 +70,17 @@ function createHalo(x, y) {
   return wrapper;
 }
 
+function clearAllHalos() {
+  halos.forEach(halo => container.removeChild(halo));
+  halos.length = 0;
+}
+
 const hammer = new Hammer(container);
+hammer.on('tap', event => {
+  if (event.target !== container) return;
+  clearAllHalos();
+});
+
 hammer.on('doubletap', event => {
   event.preventDefault();
   if (event.target !== container) return;
@@ -81,7 +90,7 @@ hammer.on('doubletap', event => {
   const x = event.center.x - (bb.left + borderWidth);
   const y = event.center.y - (bb.top + borderWidth);
   test = event.target
-  createHalo(x, y);
+  halos.push(createHalo(x, y));
 });
 
 document.ontouchmove = function(event){
