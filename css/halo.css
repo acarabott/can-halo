@@ -11,6 +11,8 @@ h1, h2, h3, h4, h5, h6 {
 
 :root {
   --my-blue: rgb(43, 156, 212);
+  --my-red: rgb(212, 100, 100);
+  --my-orange: rgb(249, 182, 118);
 }
 
 h1 {
@@ -30,7 +32,8 @@ h1 {
 .wrapper {
   position: absolute;
   width: 200px;
-  height: 200px;
+  height: 300px;
+
   border: 1px black dashed;
 }
 
@@ -51,12 +54,11 @@ h1 {
   width: var(--dimension);
   height: var(--dimension);
   border-radius: calc(var(--dimension) / 2);
-  margin: 10px auto;
+  margin: 20px auto;
 }
 
-.halo-piece {
+.button {
   --dimension: 6vh;
-
   position: absolute;
   display: flex;
   justify-content: center;
@@ -66,13 +68,23 @@ h1 {
   width: var(--dimension);
   height: var(--dimension);
   border-radius: calc(var(--dimension) / 2);
-  background-color: var(--my-blue);
   opacity: 0.7;
-  font-size:2em;
-  color: white;
+  font-size: 4vh;
   text-align: center;
 }
 
-.halo-piece:hover {
+.halo-piece {
+  background-color: var(--my-blue);
+}
+
+.button:hover {
   opacity: 1.0;
+}
+
+.backspace {
+  background-color: var(--my-orange);
+}
+
+.clear {
+  background-color: var(--my-red);
 }

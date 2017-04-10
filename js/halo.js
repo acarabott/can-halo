@@ -22,7 +22,7 @@ function createHalo(x, y) {
   const pieces = pieceLabels.map((label, i, arr) => {
     const piece = document.createElement('div');
     halo.appendChild(piece);
-    piece.className = 'halo-piece';
+    ['button', 'halo-piece'].forEach(c => piece.classList.add(c));
     piece.textContent = label;
 
     const radius = halo.offsetWidth * 0.5;
@@ -45,6 +45,26 @@ function createHalo(x, y) {
     return piece;
   });
 
+  const backspace = document.createElement('div');
+  wrapper.appendChild(backspace);
+  ['button', 'backspace'].forEach(c => backspace.classList.add(c));
+  backspace.textContent = '\u232B';
+  backspace.style.left = (wrapper.offsetWidth * 0.333) - (backspace.offsetWidth / 2);
+  const backspaceHammer = new Hammer(backspace);
+  backspaceHammer.on('tap', event => {
+    output.textContent = output.textContent.slice(0, output.textContent.length - 1);
+  });
+
+
+  const clear = document.createElement('div');
+  wrapper.appendChild(clear);
+  ['button', 'clear'].forEach(c => clear.classList.add(c));
+  clear.textContent = '\u2327';
+  clear.style.left = (wrapper.offsetWidth * 0.666) - (clear.offsetWidth / 2);
+  const clearHammer = new Hammer(clear);
+  clearHammer.on('tap', event => output.textContent = '');
+
+
   return wrapper;
 }
 
@@ -62,3 +82,5 @@ hammer.on('doubletap', event => {
 document.ontouchmove = function(event){
   event.preventDefault();
 }
+
+createHalo(200, 200);
