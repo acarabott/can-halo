@@ -81,6 +81,14 @@ h1 {
   opacity: 1.0;
 }
 
+.backspace, .clear {
+  --dimension: 5vh;
+  width: var(--dimension);
+  height: var(--dimension);
+  border-radius: calc(var(--dimension) / 2);
+  font-size: 3vh;
+}
+
 .backspace {
   background-color: var(--my-orange);
 }

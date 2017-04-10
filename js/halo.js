@@ -49,7 +49,8 @@ function createHalo(x, y) {
   wrapper.appendChild(backspace);
   ['button', 'backspace'].forEach(c => backspace.classList.add(c));
   backspace.textContent = '\u232B';
-  backspace.style.left = (wrapper.offsetWidth * 0.333) - (backspace.offsetWidth / 2);
+  backspace.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (backspace.offsetWidth / 2);
+  backspace.style.left = (wrapper.offsetWidth * 0.4) - (backspace.offsetWidth / 2);
   const backspaceHammer = new Hammer(backspace);
   backspaceHammer.on('tap', event => {
     output.textContent = output.textContent.slice(0, output.textContent.length - 1);
@@ -60,7 +61,9 @@ function createHalo(x, y) {
   wrapper.appendChild(clear);
   ['button', 'clear'].forEach(c => clear.classList.add(c));
   clear.textContent = '\u2327';
-  clear.style.left = (wrapper.offsetWidth * 0.666) - (clear.offsetWidth / 2);
+  clear.style.top = halo.offsetTop + (halo.offsetHeight / 2) - (clear.offsetWidth / 2);
+  clear.style.left = (wrapper.offsetWidth * 0.6) - (clear.offsetWidth / 2);
+
   const clearHammer = new Hammer(clear);
   clearHammer.on('tap', event => output.textContent = '');
 
@@ -83,4 +86,4 @@ document.ontouchmove = function(event){
   event.preventDefault();
 }
 
-createHalo(200, 200);
+// createHalo(200, 200);
