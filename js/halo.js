@@ -1,3 +1,7 @@
+// prevent mobile scrolling
+document.ontouchmove = function(event){ event.preventDefault(); }
+
+
 const container = document.getElementById('area');
 const halos = [];
 
@@ -93,8 +97,3 @@ hammer.on('doubletap', event => {
   halos.push(createHalo(x, y));
 });
 
-document.ontouchmove = function(event){
-  event.preventDefault();
-}
-
-// createHalo(200, 200);
