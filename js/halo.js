@@ -79,13 +79,13 @@ function clearAllHalos() {
   halos.length = 0;
 }
 
-const hammer = new Hammer(container);
-hammer.on('tap', event => {
+const containerHammer = new Hammer(container);
+containerHammer.on('tap', event => {
   if (event.target !== container) return;
   clearAllHalos();
 });
 
-hammer.on('doubletap', event => {
+containerHammer.on('doubletap', event => {
   event.preventDefault();
   if (event.target !== container) return;
 
