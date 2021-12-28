@@ -39,13 +39,13 @@ function createHalo(output: HTMLInputElement) {
   wrapper.appendChild(halo);
   halo.className = "halo";
 
-  const pieceLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-", "X"] as const;
+  const pieceLabels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-", "⌫"] as const;
   pieceLabels.forEach((label, i, arr) => {
     const piece = document.createElement("div");
     halo.appendChild(piece);
-    
+
     piece.classList.add("button", "halo-piece");
-    if (label === "X") {
+    if (label === "⌫") {
       piece.classList.add("delete");
     } else if (label === "." || label === "-") {
       piece.classList.add("mod");
@@ -76,7 +76,7 @@ function createHalo(output: HTMLInputElement) {
           ? output.value.includes(".")
             ? output.value
             : output.value + label
-          : label === "X"
+          : label === "⌫"
           ? output.value.slice(0, -1)
           : output.value + label;
     });
