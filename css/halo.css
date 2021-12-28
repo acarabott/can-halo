@@ -48,7 +48,6 @@ h1 {
 
 .output {
   position: absolute;
-  top: 45%;
   /*display: none;*/
   font-family: Menlo, Courier;
   font-weight: 200;
@@ -57,10 +56,13 @@ h1 {
 
 #one {
   left: 15%;
+  top: 15%;
 }
 
 #two {
   right: 15%;
+  top: 45%;
+
 }
 
 .output:focus {
@@ -82,18 +84,29 @@ h1 {
   position: absolute;
   display: flex;
   justify-content: center;
+  align-content: center;
   align-items: center;
+  justify-items: center;
   user-select: none;
   cursor: pointer;
   border-radius: calc(var(--dimension) / 2);
   opacity: 0.7;
-  font-size: 4vh;
+  font-size: 3vh;
   text-align: center;
 }
 
 .halo-piece {
   background-color: var(--my-blue);
   color: white;
+}
+
+.halo-piece.delete {
+  background-color: var(--my-red);
+}
+
+.halo-piece.mod {
+  background-color: var(--my-green);
+  color: black;
 }
 
 .button:hover {
