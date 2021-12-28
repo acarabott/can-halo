@@ -1,5 +1,6 @@
 body {
   font-family: Lato, 'Helvetica Neue', Helvetica;
+  font-weight: 200;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -22,7 +23,7 @@ h1 {
 
 #area {
   position: relative;
-  border: 10px solid var(--my-blue);
+  /*border:*/ 10px solid var(--my-blue);
   width: 90%;
   height: 90%;
   margin: auto;
@@ -36,7 +37,9 @@ h1 {
 }
 
 .output {
+  /*display: none;*/
   font-family: Menlo, Courier;
+  font-weight: 200;
 }
 
 .output:focus {
@@ -45,7 +48,9 @@ h1 {
 }
 
 .halo {
-  position: relative;
+  position: fixed;
+  left: 40vw;
+  top: 40vh;
   --dimension: 25vh;
   width: var(--dimension);
   height: var(--dimension);
@@ -53,7 +58,7 @@ h1 {
 }
 
 .button {
-  --dimension: 6vh;
+  --dimension: 10vh;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -82,14 +87,17 @@ h1 {
 }
 
 .backspace {
+  display: none;
   background-color: var(--my-orange);
 }
 
 .clear {
+  display: none;
   background-color: var(--my-red);
 }
 
 .done {
+  display: none;
   background-color: var(--my-green);
   color:white;
   opacity: 0.5;
